@@ -1,5 +1,6 @@
 using BookStore_API.Contracts;
 using BookStore_API.Data;
+using BookStore_API.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,9 @@ namespace BookStore_API
 
             //CORS
             services.AddCors(o => { o.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+
+            //automapper
+            services.AddAutoMapper(typeof(Maps));
 
             //swagger
             services.AddSwaggerGen(c => {
