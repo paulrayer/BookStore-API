@@ -36,8 +36,10 @@ namespace BookStore_API
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //CORS
             services.AddCors(o => { o.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
 
+            //swagger
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { 
                                         Title = "Book Store API", 
@@ -74,6 +76,7 @@ namespace BookStore_API
                 app.UseHsts();
             }
 
+            //swagger
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store API");
@@ -83,6 +86,7 @@ namespace BookStore_API
 
             app.UseHttpsRedirection();
 
+            //CORS policy
             app.UseCors("CorsPolicy");
 
             app.UseRouting();
